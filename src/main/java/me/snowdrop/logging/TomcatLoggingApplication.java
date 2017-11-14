@@ -48,6 +48,10 @@ public class TomcatLoggingApplication {
 
         // Default configuration file: logback-access.xml
         LogbackValve logbackValve = new LogbackValve();
+        
+        logbackValve.setFilename("logback-access.xml");
+
+        tomcat.addContextValves(logbackValve);
 
         // Add logback valve to embedded Tomcat
         tomcat.addContextValves(logbackValve);
