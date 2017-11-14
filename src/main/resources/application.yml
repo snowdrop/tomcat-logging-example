@@ -3,5 +3,5 @@ server:
     enabled: true
     min-response-size: 1
   use-forward-headers: true
-logging:
-  level.org.apache.tomcat: "DEBUG"
+  tomcat.protocol-header: x-forwarded-proto
+  tomcat.remote-ip-header: x-forwarded-for
