@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Bean;
 public class TomcatLoggingApplication {
     private static Log logger = LogFactory.getLog(TomcatLoggingApplication.class);
 
+    // tag::snippet-listener[]
     @Bean
     protected ServletContextListener listener() {
         return new ServletContextListener() {
@@ -40,7 +41,9 @@ public class TomcatLoggingApplication {
 
         };
     }
+    // end::snippet-listener[]
 
+    // tag::snippet-container[]
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         // configure embedded Tomcat container
@@ -53,8 +56,11 @@ public class TomcatLoggingApplication {
 
         // Add logback valve to embedded Tomcat
         tomcat.addContextValves(logbackValve);
+
+        // return the configured factory
         return tomcat;
     }
+    // end::snippet-container[]
 
     public static void main(String[] args) {
         SpringApplication.run(TomcatLoggingApplication.class, args);

@@ -1,0 +1,80 @@
+== Purpose
+
+The main goal of this booster is to send Tomcat's access logging to `stdout`, which, in the context of an application running
+on OpenShift, means appending access logs to the OpenShift console, thus enabling administrators to use the central logging
+facility to monitor Tomcat's activity.
+
+== Technical details
+
+In order to redirect Spring Boot's embedded Tomcat <<sb-conf>> logging to the OpenShift console, some work needs to be done.
+
+- You need to set `server.use-forward-headers` to `true` in your `application.yml` file:
+[source,yaml]
+server:
+  use-forward-headers: true
+
+
+- You will need to configure your embedded Tomcat to add the `logback-access` valve by defining a provider method:
+
+----
+include::src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-container]
+----
+
+- _Optional_: It is possible to register a `ServletContextListener` to log information when the servlet context is initialized / destroyed:
+
+----
+include::src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-listener]
+----
+
+- _Optional_: You can also specify logging levels (e.g. `DEBUG`) for different packages (e.g. `org.apache.tomcat`) by adding
+`level.<package name>` stanzas followed by the level name in `application.yml`. The name of the logging file can also be
+specified using the `file` property:
+
+[source,yaml]
+logging:
+  level.org.apache.tomcat: "DEBUG"
+  file: "application.log"
+
+== Deploying and interacting with the booster
+
+- Create a new project `tomcat-logging` (or whatever you want to call it):
+
+[source,bash,options="nowrap",subs="attributes+"]
+----
+$ oc new-project tomcat-logging
+----
+
+- Build and deploy the Spring Boot application using the Fabric8 Maven Plugin <<fmp>>
+
+[source,bash,options="nowrap",subs="attributes+"]
+----
+$ mvn clean fabric8:deploy -Popenshift
+----
+
+- Retrieve the route for the application:
+
+[source,bash,options="nowrap",subs="attributes+"]
+----
+$ oc get route spring-boot-tomcat-logging-booster -o jsonpath='http://{.spec.host}/greet/world'
+----
+
+- Interact with the application by navigating to the route URL in your browser and changing the last path part (`world` in
+the example above) and try accessing different URLs.
+
+- Open your OpenShift console (if you use minishift <<mini>>: `minishift console` should do it), navigate to the application
+deployment: `<openshift host>/console/project/tomcat-logging/browse/dc/spring-boot-tomcat-logging-booster` and click on
+`View Log`. You should see access entries similar to:
+----
+192.168.64.1 - - 22/Nov/2017:15:18:44 +0000 "GET /greet/world HTTP/1.1" 200 -
+192.168.64.1 - - 22/Nov/2017:15:18:45 +0000 "GET /greet/ HTTP/1.1" 404 -
+----
+
+
+[bibliography]
+== References
+
+- [[[fmp,1]]] Maven Fabric8 plugin reference: https://maven.fabric8.io
+- [[[la,2]]] For more details on `logback-access`, please look at: https://logback.qos.ch/access.html
+- [[[la-sb,3]]] An interesting third-party project with deeper `logback-access` integration with Spring Boot can be found at: https://github.com/akihyro/logback-access-spring-boot-starter
+- [[[sb-conf,4]]] More details on embedded servlet containers in Spring Boot: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html
+- [[[mini,5]]] Minishift: https://docs.openshift.org/latest/minishift/index.html
