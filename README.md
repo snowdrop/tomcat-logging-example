@@ -4,9 +4,14 @@ The main goal of this booster is to send Tomcat's access logging to `stdout`, wh
 on OpenShift, means appending access logs to the OpenShift console, thus enabling administrators to use the central logging
 facility to monitor Tomcat's activity.
 
-You can also turn on Tomcat DEBUG logging by setting in application.yml:
+You can also specify logging levels (e.g. `DEBUG`) for different packages (e.g. `org.apache.tomcat`) by adding 
+`level.<package name>` stanzas followed by the level name in `application.yml`. The name of the logging file can also be 
+specified using the `file` property: 
+```yaml
 logging:
   level.org.apache.tomcat: "DEBUG"
+  file: "application.log"
+```
 
 # References
 
