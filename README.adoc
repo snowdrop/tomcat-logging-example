@@ -16,12 +16,14 @@ server:
 
 - You will need to configure your embedded Tomcat to add the `logback-access` valve by defining a provider method:
 
+[source,java]
 ----
 include::https://raw.githubusercontent.com/snowdrop/spring-boot-tomcat-logging-booster/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-container]
 ----
 
 - _Optional_: It is possible to register a `ServletContextListener` to log information when the servlet context is initialized / destroyed:
 
+[source,java]
 ----
 include::https://raw.githubusercontent.com/snowdrop/spring-boot-tomcat-logging-booster/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-listener]
 ----
