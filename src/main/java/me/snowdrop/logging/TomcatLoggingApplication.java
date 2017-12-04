@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2017 Red Hat, Inc. and/or its affiliates.
  * <p>
  * Licensed under the Eclipse Public License version 1.0, available at
