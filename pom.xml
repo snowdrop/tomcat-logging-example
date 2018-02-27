@@ -15,7 +15,7 @@
   
   <groupId>me.snowdrop</groupId>
   <artifactId>spring-boot-tomcat-logging-booster</artifactId>
-  <version>1-SNAPSHOT</version>
+  <version>1.5.10-1-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
