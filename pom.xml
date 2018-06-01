@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.openshift.booster</groupId>
+    <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
     <version>22</version>
   </parent>
