@@ -20,7 +20,7 @@
   <properties>
     <logback-access.version>1.2.3</logback-access.version>
     <openjdk18-openshift.version>1.3</openjdk18-openshift.version>
-    <spring-boot-bom.version>1.5.14.Beta2</spring-boot-bom.version>
+    <spring-boot-bom.version>1.5.14.Beta3</spring-boot-bom.version>
     <spring-boot.version>1.5.14.RELEASE</spring-boot.version>
 
     <fabric8.generator.from>
