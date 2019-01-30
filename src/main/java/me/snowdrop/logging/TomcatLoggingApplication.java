@@ -13,8 +13,8 @@ import ch.qos.logback.access.tomcat.LogbackValve;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -45,19 +45,18 @@ public class TomcatLoggingApplication {
 
     // tag::snippet-container[]
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
+    public ServletWebServerFactory servletContainer() {
         // configure embedded Tomcat container
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
 
         // Default configuration file: logback-access.xml
         LogbackValve logbackValve = new LogbackValve();
-        
+
         logbackValve.setFilename("logback-access.xml");
 
         // Add logback valve to embedded Tomcat
         tomcat.addContextValves(logbackValve);
 
-        // return the configured factory
         return tomcat;
     }
     // end::snippet-container[]
