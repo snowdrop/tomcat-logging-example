@@ -10,7 +10,7 @@
   <description>Spring Boot - Tomcat Logging Booster</description>
   <groupId>me.snowdrop</groupId>
   <artifactId>spring-boot-tomcat-logging-booster</artifactId>
-  <version>1.5.19-1-SNAPSHOT</version>
+  <version>1.5.19-1</version>
   <properties>
     <logback-access.version>1.2.3</logback-access.version>
     <openjdk18-openshift.version>1.3</openjdk18-openshift.version>
