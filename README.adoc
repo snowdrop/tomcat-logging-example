@@ -1,6 +1,6 @@
 == Purpose
 
-The main goal of this booster is to send Tomcat's access logging to `stdout`, which, in the context of an application running
+The main goal of this example is to send Tomcat's access logging to `stdout`, which, in the context of an application running
 on OpenShift, means appending access logs to the OpenShift console, thus enabling administrators to use the central logging
 facility to monitor Tomcat's activity.
 
@@ -18,14 +18,14 @@ server:
 
 [source,java]
 ----
-include::https://raw.githubusercontent.com/snowdrop/spring-boot-tomcat-logging-booster/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-container]
+include::https://raw.githubusercontent.com/snowdrop/tomcat-logging-example/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-container]
 ----
 
 - _Optional_: It is possible to register a `ServletContextListener` to log information when the servlet context is initialized / destroyed:
 
 [source,java]
 ----
-include::https://raw.githubusercontent.com/snowdrop/spring-boot-tomcat-logging-booster/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-listener]
+include::https://raw.githubusercontent.com/snowdrop/tomcat-logging-example/master/src/main/java/me/snowdrop/logging/TomcatLoggingApplication.java[tags=snippet-listener]
 ----
 
 - _Optional_: You can also specify logging levels (e.g. `DEBUG`) for different packages (e.g. `org.apache.tomcat`) by adding
@@ -37,7 +37,7 @@ logging:
   level.org.apache.tomcat: "DEBUG"
   file: "application.log"
 
-== Deploying and interacting with the booster
+== Deploying and interacting with the example
 
 - Create a new project `tomcat-logging` (or whatever you want to call it):
 
@@ -57,14 +57,14 @@ $ mvn clean fabric8:deploy -Popenshift
 
 [source,bash,options="nowrap",subs="attributes+"]
 ----
-$ oc get route spring-boot-tomcat-logging-booster -o jsonpath='http://{.spec.host}/greet/world'
+$ oc get route tomcat-logging-example -o jsonpath='http://{.spec.host}/greet/world'
 ----
 
 - Interact with the application by navigating to the route URL in your browser and changing the last path part (`world` in
 the example above) and try accessing different URLs.
 
 - Open your OpenShift console (if you use minishift <<mini>>: `minishift console` should do it), navigate to the application
-deployment: `<openshift host>/console/project/tomcat-logging/browse/dc/spring-boot-tomcat-logging-booster` and click on
+deployment: `<openshift host>/console/project/tomcat-logging/browse/dc/tomcat-logging-example` and click on
 `View Log`. You should see access entries similar to:
 ----
 192.168.64.1 - - 22/Nov/2017:15:18:44 +0000 "GET /greet/world HTTP/1.1" 200 -
