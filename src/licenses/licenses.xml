@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<licenseSummary>
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.2.3</version>
+            <licenses>
+                <license>
+                    <name>GNU Lesser General Public License v2.1 only</name>
+                    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+                </license>
+                <license>
+                    <name>Eclipse Public License, Version 1.0</name>
+                    <url>http://repository.jboss.org/licenses/epl-1.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+            <licenses>
+                <license>
+                    <name>GNU Lesser General Public License v2.1 only</name>
+                    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+                </license>
+                <license>
+                    <name>Eclipse Public License, Version 1.0</name>
+                    <url>http://repository.jboss.org/licenses/epl-1.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+    </dependencies>
+</licenseSummary>
